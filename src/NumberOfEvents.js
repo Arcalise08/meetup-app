@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import {ErrorAlert} from "./alert";
 
 class NumberOfEvents extends Component {
     constructor() {
         super();
         this.state = {
-            numberToShow: 0
+            numberToShow: 0,
+            showError: ""
         }
     }
 
@@ -13,6 +15,16 @@ class NumberOfEvents extends Component {
         this.setState({
             numberToShow: event.target.value,
         })
+        if (event.target.value <= 0) {
+            this.setState({
+                showError: "Number should be greater than 0",
+            })
+        }
+        else {
+            this.setState({
+                showError: "",
+            })
+        }
     }
 
     render() {
@@ -27,6 +39,7 @@ class NumberOfEvents extends Component {
                     onChange={this.handleNumberChange}
                     style={{textAlign : "center"}}
                 />
+                <ErrorAlert text={this.state.showError}/>
 
             </div>
         )

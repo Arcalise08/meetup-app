@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getSuggestions } from './api';
-import { InfoAlert } from "./alert";
+import {InfoAlert, WarningAlert} from "./alert";
 
 class CitySearch extends Component {
     constructor() {
@@ -9,7 +9,8 @@ class CitySearch extends Component {
             query: '',
             showSuggestion: false,
             suggestions: [],
-            infoText: ""
+            infoText: "",
+            offline: "",
         }
     }
 
@@ -30,7 +31,7 @@ class CitySearch extends Component {
                     showSuggestion: true,
                     suggestions: suggestions,
                 })
-                if (value && suggestions.length === 0) {
+                if (value.length >= 3 && suggestions.length === 0) {
                     this.setState({
                         infoText: 'We can not find the city you are looking for. Please try another city',
                     });
@@ -42,6 +43,17 @@ class CitySearch extends Component {
                 }
             });
 
+        }
+
+        if (!navigator.onLine) {
+            this.setState({
+                offline: "Cannot perform search while Internet is disconnected. Please try again later!"
+            })
+        }
+        else {
+         this.setState({
+             offline: ""
+         })
         }
 
     }
@@ -58,13 +70,14 @@ class CitySearch extends Component {
         return (
             <div className="CitySearch">
                 <h1 className="display-4 mb-5">Search for events near any city!</h1>
-                <InfoAlert text={this.state.infoText}/>
+                <WarningAlert text={this.state.offline}/>
                 <input
                 type="text"
                 className="city mx-auto form-control mb-3 col-sm-6"
                 onChange={this.handleInputChanged}
                 value={this.state.query}
                 />
+                <InfoAlert text={this.state.infoText}/>
                 <ul className="suggestions position-absolute p-0
 
                  ">
