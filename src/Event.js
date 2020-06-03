@@ -77,7 +77,7 @@ class Event extends Component {
                             </PieChart>
                         </ResponsiveContainer>
                     </div>
-                        : <p className="text-left">{this.props.event.yes_rsvp_count > 0 ? this.props.event.yes_rsvp_count + " are attending!" : "Zero reported attendance."}</p>}
+                        : <p className="text-left">{this.props.event.yes_rsvp_count > 0 ? this.props.event.yes_rsvp_count + " are going!" : "Zero reported attendance."}</p>}
                     <Collapse className="collapseElement mt-4" in={this.props.itemToShow === this.props.event.id ? true : false}>
                             <p className="hidden">
 
