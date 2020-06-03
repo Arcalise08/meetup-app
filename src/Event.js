@@ -1,8 +1,8 @@
-import React, { Component, useEffect } from "react";
+import React, { Component} from "react";
 import Card from 'react-bootstrap/Card'
 import Collapse from 'react-bootstrap/Collapse'
 import {
-    PieChart, Pie, Cell, Sector, Legend, Tooltip, ResponsiveContainer, ScatterChart, Bar
+    PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer,
 } from 'recharts';
 
 const data01 = [
@@ -23,7 +23,7 @@ class Event extends Component {
         }
     }
 
-    getPieData = (data) => {
+    getPieData = () => {
         var limit = this.props.event.rsvp_limit;
         var rsvp = this.props.event.yes_rsvp_count;
 
@@ -41,7 +41,6 @@ class Event extends Component {
             return newStr;
         }
     }
-
 
     render() {
         return (
@@ -62,6 +61,7 @@ class Event extends Component {
                             <PieChart >
                                 <Pie
                                     data={this.getPieData()}
+                                    dataKey={"value"}
                                     cx={55}
                                     cy={45}
                                     labelLine={false}
@@ -77,7 +77,7 @@ class Event extends Component {
                             </PieChart>
                         </ResponsiveContainer>
                     </div>
-                        : <p className="text-left">{this.props.event.yes_rsvp_count > 0 ? this.props.event.yes_rsvp_count + " is attending" : "zero reported attendance."}</p>}
+                        : <p className="text-left">{this.props.event.yes_rsvp_count > 0 ? this.props.event.yes_rsvp_count + " is attending" : "Zero reported attendance."}</p>}
                     <Collapse className="collapseElement mt-4" in={this.props.itemToShow === this.props.event.id ? true : false}>
                             <p className="hidden">
 

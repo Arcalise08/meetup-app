@@ -28,7 +28,7 @@ class NumberOfEvents extends Component {
     }
 
     render() {
-        const { eventsNum, currentNum} = this.props;
+        const { currentNum} = this.props;
         return (
             <div className="eventNumber">
                 <small>Events to show<br/></small>
